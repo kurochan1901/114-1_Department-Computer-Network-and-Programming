@@ -54,3 +54,13 @@ label.required::after {
     vertical-align: middle;
     margin-right: 8px;
     }
+    /* 多選 */
+    input[type="checkbox"], label[for="staff"], label[for="fan"], label[for="poi"] {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+    }
+
+    form div {
+    margin-bottom: 10px;
+    }

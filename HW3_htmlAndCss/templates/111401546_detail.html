@@ -28,7 +28,7 @@
             allowfullscreen>
         </iframe>
         <!-- 表單 -->
-        <form action="https://httpbin.org/get" method="get">
+        <form action="111401546_index.html" method="get">
             <label for="name" class="required">你是誰？</label>
             <input type="text" id="name" name="name" required><br><br>
 
@@ -50,7 +50,22 @@
             <input type="radio" id="radio_no" name="know" value="no">
             <label for="radio_no">否</label><br><br>
 
-            <label for="item">對什麼道具感興趣？</label>
+            <label for="item">對什麼道具感興趣？(可複選)</label>
+            <div>
+                <input type="checkbox" id="staff" name="item" value="staff">
+                <label for="staff">棍</label>
+            </div>
+            <div>
+                <input type="checkbox" id="fan" name="item" value="fan">
+                <label for="fan">扇</label>
+            </div>
+            <div>
+                <input type="checkbox" id="poi" name="item" value="poi">
+                <label for="poi">球</label>
+            </div><br><br>
+
+            <label for="textarea">想說的話？</label>
+            <textarea id="textarea_1" name="textarea_1" rows="4" cols="50" placeholder="輸入中..."></textarea><br><br>
 
             <input type="submit" value="送出">
 
