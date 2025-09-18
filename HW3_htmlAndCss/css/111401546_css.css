@@ -2,26 +2,33 @@
 body {
   font-family: Arial, sans-serif;
   margin: 20px;
-  background-color: aquas;
 }
 
 /* 表格 */
 table {
-  width: 100%;
+  width: 90%;
+  table-layout: fixed;
   border-collapse: collapse;
-}
-
-table, th, td {
   border: 3px solid black;
 }
 
 th {
   background-color: #f2f2f2;
+  width: 33.33%;
   text-align: center;
+  border: 1px solid black;
   padding: 10px;
 }
 
 td {
   text-align: center;
+  width: 33.33%;
+  border: 1px solid black;
   padding: 10px;
+}
+
+/* 圖片 */
+.img {
+  max-width: 100%;
+  height: auto;
 }
