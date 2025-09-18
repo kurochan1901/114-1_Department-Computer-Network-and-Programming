@@ -32,3 +32,18 @@ td {
   max-width: 100%;
   height: auto;
 }
+
+/* 表單 */
+form {
+  margin-top: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+label.required::after {
+  content: " *";
+  color: red;
+}

@@ -20,11 +20,31 @@
         <iframe 
             width="560" 
             height="315" 
-            src="https://www.youtube.com/embed/2f9OwDU-Auc" 
+            src="https://www.youtube.com/embed/2f9OwDU-Auc?autoplay=1&mute=1" 
             title="YouTube video player" 
             frameborder="0" 
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
             allowfullscreen>
         </iframe>
+        <!-- 表單 -->
+        <form action="https://httpbin.org/get" method="get">
+            <label for="name" class="required">你是誰：</label>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="select_1">從哪裡得知這個網站：</label>
+            <select id="select_1" name="select_1">
+                <option value="choose">請選擇</option>
+                <option value="facebook">Facebook</option>
+                <option value="instagram">Instagram</option>
+                <option value="line">Line</option>
+                <option value="twitter">Twitter</option>
+                <option value="youtube">Youtube</option>
+                <option value="google">Google</option>
+                <option value="other">其他</option>
+            </select><br><br>
+
+            <input type="submit" value="送出">
+
+    
+        </form>
     </body>
 </html>
