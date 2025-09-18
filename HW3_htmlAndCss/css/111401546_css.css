@@ -47,3 +47,10 @@ label.required::after {
   content: " *";
   color: red;
 }
+
+    /* 單選 */
+    input[type="radio"], label[for="radio_yes"], label[for="radio_no"] {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+    }

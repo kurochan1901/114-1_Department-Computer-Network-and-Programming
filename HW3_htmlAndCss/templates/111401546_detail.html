@@ -12,6 +12,7 @@
         <!-- 清單 -->
         <ul>
             <li>綽號：胡小黑🥕</li>
+            <li>道具：棍、扇</li>
             <li>中央火舞12th 總務／副社</li>
             <li>中央火舞14th 社寵（有拿薪水）</li>
             <li>在中央火舞擔任團舞磚頭🧱</li>
@@ -28,9 +29,10 @@
         </iframe>
         <!-- 表單 -->
         <form action="https://httpbin.org/get" method="get">
-            <label for="name" class="required">你是誰：</label>
+            <label for="name" class="required">你是誰？</label>
             <input type="text" id="name" name="name" required><br><br>
-            <label for="select_1">從哪裡得知這個網站：</label>
+
+            <label for="select_1">從哪裡得知這個網站？</label>
             <select id="select_1" name="select_1">
                 <option value="choose">請選擇</option>
                 <option value="facebook">Facebook</option>
@@ -41,6 +43,14 @@
                 <option value="google">Google</option>
                 <option value="other">其他</option>
             </select><br><br>
+
+            <label for="know">是第一次知道火舞社嗎？</label>
+            <input type="radio" id="radio_yes" name="know" value="yes">
+            <label for="radio_yes">是</label>
+            <input type="radio" id="radio_no" name="know" value="no">
+            <label for="radio_no">否</label><br><br>
+
+            <label for="item">對什麼道具感興趣？</label>
 
             <input type="submit" value="送出">
 
