@@ -6,8 +6,13 @@ function guessNumber() {
     const guessInput = parseInt(document.getElementById("guessInput").value);
     count++;
 
-    if (isNaN(guessInput)) {
+    if (isNaN(guessInput)){
         alert("請輸入一個有效的數字！");
+        return;
+    };
+
+    if (guessInput < 0 || guessInput > 100) {
+        alert("請輸入0到100之間的數字！");
         return;
     };
 
