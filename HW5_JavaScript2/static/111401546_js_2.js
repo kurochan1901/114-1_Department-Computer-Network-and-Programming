@@ -23,11 +23,15 @@ document.querySelectorAll("tr").forEach(row => {
     const minusBtn = row.querySelector(".minus");
     const plusBtn = row.querySelector(".plus");
     const quantityInput = row.querySelector(".quantity");
+    const price = parseInt(row.querySelector(".price").textContent);
+    const subtotal = row.querySelector(".subtotal");
+    const stock = parseInt(row.dataset.stock);
 
     minusBtn.addEventListener("click", () => {
         let quantity = parseInt(quantityInput.textContent);
         if (quantity > 1) quantity--;
         quantityInput.textContent = quantity;
+        subtotal.textContent = quantity * price;
         updateTotal();
     });
 
@@ -35,6 +39,7 @@ document.querySelectorAll("tr").forEach(row => {
         let quantity = parseInt(quantityInput.textContent);
         quantity++;
         quantityInput.textContent = quantity;
+        subtotal.textContent = quantity * price;
         updateTotal();
     });
 
