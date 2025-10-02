@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         document.getElementById("total").textContent = total;
     }
+    window.updateTotal = updateTotal;
 
     //結帳
     document.getElementById("checkoutBtn").addEventListener("click", () => {
@@ -80,12 +81,19 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll("#cartTable tbody tr").forEach(row => {
             const checkbox = row.querySelector(".itemCheckbox");
             if (!checkbox || !checkbox.checked) return;
-        
+            
+            const price = parseInt(row.querySelector(".price").textContent);
+            const subtotalCell = row.querySelector(".subtotal");
+
             const name = row.querySelector(".productName").textContent.trim();
             const quantityInput = row.querySelector(".quantityInput");
             const quantity = parseInt(quantityInput.value);
             const stockCell = row.querySelector(".stock");
             let stock = parseInt(stockCell.textContent);
+
+            if (price && quantityInput && subtotalCell) {
+            subtotalCell.textContent = price * parseInt(quantityInput.value);
+            }
 
             summary += `商品：${name}，數量：${quantity}\n`;
 
@@ -99,7 +107,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 quantityInput.value = 0;
             }
             checkbox.checked = false;
-            const price = parseInt(row.querySelector(".price").textContent);
             row.querySelector(".subtotal").textContent = price * parseInt(quantityInput.value);
         });
 
