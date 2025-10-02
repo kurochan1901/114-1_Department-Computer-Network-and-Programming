@@ -16,31 +16,36 @@ document.addEventListener("DOMContentLoaded", () => {
         updateTotal();
         });
     });
-});
 
-//數量加減
-document.querySelectorAll("tr").forEach(row => {
-    const minusBtn = row.querySelector(".minus");
-    const plusBtn = row.querySelector(".plus");
-    const quantityInput = row.querySelector(".quantity");
-    const price = parseInt(row.querySelector(".price").textContent);
-    const subtotal = row.querySelector(".subtotal");
-    const stock = parseInt(row.dataset.stock);
+    //數量加減
+    document.getElementById("cartTable").addEventListener("click", function(e) {
+        const target = e.target;
 
-    minusBtn.addEventListener("click", () => {
-        let quantity = parseInt(quantityInput.textContent);
-        if (quantity > 1) quantity--;
-        quantityInput.textContent = quantity;
-        subtotal.textContent = quantity * price;
-        updateTotal();
+        const row = target.closest("tr");
+        if (!row) return;
+
+        const quantitySpan = row.querySelector(".quantity span");
+        const price = parseInt(row.querySelector(".price").textContent);
+        const subtotal = row.querySelector(".subtotal");
+        const stock = parseInt(row.querySelector(".stock").textContent);
+
+        let quantity = parseInt(quantitySpan.textContent);
+
+        if (target.classList.contains("plus")) {
+            if (quantity < stock) {
+                quantity++;
+            }
+        }
+        if (target.classList.contains("minus")) {
+            if (quantity > 0) {
+                quantity--;
+            }
+        }
+    
+        quantitySpan.textContent = quantity;
+        subtotal.textContent = price * quantity;
+
+        updateTotal();    
     });
-
-    plusBtn.addEventListener("click", () => {
-        let quantity = parseInt(quantityInput.textContent);
-        quantity++;
-        quantityInput.textContent = quantity;
-        subtotal.textContent = quantity * price;
-        updateTotal();
-    });
-
+    
 });
