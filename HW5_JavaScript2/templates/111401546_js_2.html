@@ -36,10 +36,10 @@
                     <td class="price">100</td>
                     <td class="quantity">
                         <button class="minus">-</button>
-                        <span>1</span>
+                        <input type="number" class="quantityInput" value="1" min="1" max="stock" style="width:40px;">
                         <button class="plus">+</button>
                     </td>
-                    <td class="subtotal">1</td>
+                    <td class="subtotal"></td>
                 </tr>
                 <tr>
                     <td><input type="checkbox" class="itemCheckbox" onchange="updateTotal()"></td>
@@ -51,10 +51,10 @@
                     <td class="price">100</td>
                     <td class="quantity">
                         <button class="minus">-</button>
-                        <span>1</span>
+                        <input type="number" class="quantityInput" value="1" min="1" max="stock" style="width:40px;">
                         <button class="plus">+</button>
                     </td>
-                    <td class="subtotal">100</td>
+                    <td class="subtotal"></td>
                 </tr>
                 <tr>
                     <td><input type="checkbox" class="itemCheckbox" onchange="updateTotal()"></td>
@@ -66,10 +66,10 @@
                     <td class="price">100</td>
                     <td class="quantity">
                         <button class="minus">-</button>
-                        <span>1</span>
+                        <input type="number" class="quantityInput" value="1" min="1" max="stock" style="width:40px;">
                         <button class="plus">+</button>
                     </td>
-                    <td class="subtotal">1</td>
+                    <td class="subtotal"></td>
                 </tr>
                 <tr>
                     <td><input type="checkbox" class="itemCheckbox" onchange="updateTotal()"></td>
@@ -77,16 +77,20 @@
                         <img src="../img/img4_Madge-3x.png" alt="商品D" style="width:40px; height:40px; vertical-align:middle;">
                         <br>Madge
                     </td>
-                    <td class="stock">10</td>
+                    <td class="stock">2</td>
                     <td class="price">100</td>
                     <td class="quantity">
                         <button class="minus">-</button>
-                        <span>1</span>
+                        <input type="number" class="quantityInput" value="1" min="1" max="stock" style="width:40px;">
                         <button class="plus">+</button>
                     </td>
                     <td class="subtotal"></td>
                 </tr>
             </tbody>
+            <tr>
+                <td colspan="5" style="text-align:right; font-weight:bold;">總金額：</td>
+                <td id="total">0</td>
+            </tr>
         </table>
 
     </body>
