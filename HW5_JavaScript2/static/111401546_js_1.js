@@ -19,9 +19,9 @@ function guessNumber() {
         startTime = new Date();
         timerInterval = setInterval( () => {
             const now = new Date();
-            timePassed = Math.floor((now - startTime) / 1000).toFixed(2); // 更新 timePassed
+            timePassed = Math.floor((now - startTime) / 1000); // 更新 timePassed
             timerDisplay.textContent = ` ${timePassed} `;
-        }, 10);
+        }, 1000);
     }
 
     // 判斷數字大小
@@ -42,7 +42,7 @@ function guessNumber() {
         hint.textContent = `太小了，介於${min} ~ ${max}之間`;
     }else {
         // 重新計算 timePassed
-        timePassed = Math.floor((new Date() - startTime) / 1000).toFixed(2);
+        timePassed = Math.floor((new Date() - startTime) / 1000);
         alert(`恭喜你答對了！答案是${answer}。\n你總共猜了${count}次。\n耗時${timePassed}秒。`);
         answer = Math.floor(Math.random() * 101);
 
