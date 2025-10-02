@@ -10,8 +10,6 @@ function guessNumber() {
     const guessInput = parseInt(document.getElementById("guessInput").value);
     const hint = document.getElementById("hint");
     const timerDisplay = document.getElementById("timer");
-    const log = document.getElementById("log");
-    const record = document.createElement("p");
     let timePassed = 0; 
 
     count++;
@@ -46,12 +44,16 @@ function guessNumber() {
         // 重新計算 timePassed
         timePassed = Math.floor((new Date() - startTime) / 1000);
         alert(`恭喜你答對了！答案是${answer}。\n你總共猜了${count}次。\n耗時${timePassed}秒。`);
-        answer = Math.floor(Math.random() * 101);
-        
+        answer = 11;//Math.floor(Math.random() * 101);
+
         // 紀錄
-        record.textContent = `第 ${count} 次猜中，耗時 ${timeSpent} 秒，時間：${timeString}`;
+        const log = document.getElementById("log");
+        const record = document.createElement("p");
+        const now = new Date();
+        const timeString = now.toLocaleTimeString();
+        record.textContent = `第 ${count} 次猜中，耗時 ${timePassed} 秒，時間：${timeString}`;
         log.appendChild(record);
-        
+
         // 重置
         min = 0;
         max = 100;
