@@ -1,4 +1,4 @@
-let answer = Math.floor(Math.random() * 101);
+let answer = 11;//Math.floor(Math.random() * 101);
 let min = 0;
 let max = 100;
 let count = 0;
@@ -10,6 +10,7 @@ function guessNumber() {
     const guessInput = parseInt(document.getElementById("guessInput").value);
     const hint = document.getElementById("hint");
     const timerDisplay = document.getElementById("timer");
+    
     let timePassed = 0; 
 
     count++;
@@ -45,6 +46,9 @@ function guessNumber() {
         timePassed = Math.floor((new Date() - startTime) / 1000);
         alert(`恭喜你答對了！答案是${answer}。\n你總共猜了${count}次。\n耗時${timePassed}秒。`);
         answer = Math.floor(Math.random() * 101);
+        
+        
+        // 重置
         min = 0;
         max = 100;
         count = 0;
@@ -52,4 +56,5 @@ function guessNumber() {
         clearInterval(timerInterval);
         document.getElementById("timer").textContent = "0";
     };
+
 };
