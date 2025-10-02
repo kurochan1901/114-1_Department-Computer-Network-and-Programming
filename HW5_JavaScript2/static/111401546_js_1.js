@@ -2,13 +2,27 @@ let answer = Math.floor(Math.random() * 101);
 let min = 0;
 let max = 100;
 let count = 0;
+let startTime = null;
+let timerInterval = null;
 console.log(answer);
 
 function guessNumber() {
     const guessInput = parseInt(document.getElementById("guessInput").value);
     const hint = document.getElementById("hint");
+    const timerDisplay = document.getElementById("timer");
     count++;
 
+    //計時開始
+    if (!startTime){
+        startTime = new Date();
+        timerInterval = setInterval( () => {
+            const now = new Date();
+            const timePassed = Math.floor((now - startTime) / 1000);
+            timerDisplay.textContent = `已經過：${timePassed}秒`;
+        } )
+    }
+
+    // 判斷數字大小
     if (isNaN(guessInput)){
         hint.textContent = "請輸入一個有效的數字！";
         return;
