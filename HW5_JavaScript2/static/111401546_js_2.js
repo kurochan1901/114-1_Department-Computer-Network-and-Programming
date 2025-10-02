@@ -1,3 +1,4 @@
+//全域監聽click
 document.addEventListener("DOMContentLoaded", () => {
     const selectAll = document.getElementById("selectAll");
     const itemCheckboxes = document.querySelectorAll(".itemCheckbox");
@@ -69,5 +70,42 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         document.getElementById("total").textContent = total;
     }
+
+    //結帳
+    document.getElementById("checkoutBtn").addEventListener("click", () => {
+        const totalnum = parseInt(document.getElementById("total").textContent);
+        if (totalnum <= 0) return;
+
+        let summary = `購買明細：\n`;
+        document.querySelectorAll("#cartTable tbody tr").forEach(row => {
+            const checkbox = row.querySelector(".itemCheckbox");
+            if (!checkbox || !checkbox.checked) return;
+        
+            const name = row.querySelector(".productName").textContent.trim();
+            const quantityInput = row.querySelector(".quantityInput");
+            const quantity = parseInt(quantityInput.value);
+            const stockCell = row.querySelector(".stock");
+            let stock = parseInt(stockCell.textContent);
+
+            summary += `商品：${name}，數量：${quantity}\n`;
+
+            stock -= quantity;
+            if (stock < 0) stock = 0;
+            stockCell.textContent = stock;
+            
+            if (stock > 0) {
+                quantityInput.value = 1;
+            } else {
+                quantityInput.value = 0;
+            }
+            checkbox.checked = false;
+            const price = parseInt(row.querySelector(".price").textContent);
+            row.querySelector(".subtotal").textContent = price * parseInt(quantityInput.value);
+        });
+
+        alert(summary + `總金額：${totalnum} 元`);
+        document.getElementById("selectAll").checked = false;
+        updateTotal();
+    });
 
 });
