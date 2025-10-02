@@ -18,8 +18,8 @@ function guessNumber() {
         timerInterval = setInterval( () => {
             const now = new Date();
             const timePassed = Math.floor((now - startTime) / 1000);
-            timerDisplay.textContent = `已經過：${timePassed}秒`;
-        } )
+            timerDisplay.textContent = ` ${timePassed} `;
+        }, 1000);
     }
 
     // 判斷數字大小
@@ -44,6 +44,9 @@ function guessNumber() {
         min = 0;
         max = 100;
         count = 0;
+        startTime = null;
+        clearInterval(timerInterval);
+        document.getElementById("timer").textContent = "0";
     };
 
 };
