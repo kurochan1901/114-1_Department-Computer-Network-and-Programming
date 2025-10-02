@@ -10,6 +10,8 @@ function guessNumber() {
     const guessInput = parseInt(document.getElementById("guessInput").value);
     const hint = document.getElementById("hint");
     const timerDisplay = document.getElementById("timer");
+    let timePassed = 0; 
+
     count++;
 
     //計時開始
@@ -17,7 +19,7 @@ function guessNumber() {
         startTime = new Date();
         timerInterval = setInterval( () => {
             const now = new Date();
-            const timePassed = Math.floor((now - startTime) / 1000);
+            timePassed = Math.floor((now - startTime) / 1000); // 更新 timePassed
             timerDisplay.textContent = ` ${timePassed} `;
         }, 1000);
     }
@@ -39,7 +41,9 @@ function guessNumber() {
         min = guessInput;
         hint.textContent = `太小了，介於${min} ~ ${max}之間`;
     }else {
-        alert(`恭喜你答對了！答案是${answer}。\n你總共猜了${count}次。`);
+        // 重新計算 timePassed
+        timePassed = Math.floor((new Date() - startTime) / 1000);
+        alert(`恭喜你答對了！答案是${answer}。\n你總共猜了${count}次。\n耗時${timePassed}秒。`);
         answer = Math.floor(Math.random() * 101);
         min = 0;
         max = 100;
@@ -48,5 +52,4 @@ function guessNumber() {
         clearInterval(timerInterval);
         document.getElementById("timer").textContent = "0";
     };
-
 };
