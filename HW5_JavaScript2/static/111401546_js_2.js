@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //全選
     selectAll.addEventListener("change", () => {
+        // 重新取得所有 checkbox
+        const itemCheckboxes = document.querySelectorAll(".itemCheckbox");
         itemCheckboxes.forEach(cb => cb.checked = selectAll.checked);
         updateTotal();
     });
