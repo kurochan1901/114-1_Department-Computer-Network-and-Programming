@@ -1,0 +1,38 @@
+<!-- templates/base.html -->
+<!doctype html>
+<html lang="zh-Hant">
+<meta charset="utf-8">
+<title>Teacher Login</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 720px; margin: 32px auto; }
+  label { display:block; margin-top: 8px; }
+  .msg { list-style:none; padding:0; }
+  .msg li { margin:6px 0; }
+  .msg .error { color:#c00; }
+  .msg .ok { color:#090; }
+  nav { display:flex; justify-content:space-between; margin-bottom:12px; }
+</style>
+<body>
+  <nav>
+    <div> {{ session.get('teacher_name') or '' }}</div>
+    <div>
+      {% if session.get('teacher_name') %}
+        <a href="{{ url_for('grades') }}">Grades</a> |
+        <a href="{{ url_for('logout') }}">Logout</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul class="msg">
+        {% for cat, m in messages %}
+          <li class="{{ cat }}">{{ m }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+  {% block content %}{% endblock %}
+</body>
+</html>

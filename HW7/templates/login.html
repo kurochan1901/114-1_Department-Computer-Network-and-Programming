@@ -1,0 +1,12 @@
+<!-- templates/login.html -->
+{% extends "base.html" %}
+{% block content %}
+<h2>教師登入</h2>
+<form method="post" action="{{ url_for('login') }}">
+  <label>名稱</label>
+  <input name="username" required>
+  <label>密碼</label>
+  <input name="password" type="password" required>
+  <button type="submit" style="margin-top:10px;">登入</button>
+</form>
+{% endblock %}
