@@ -290,12 +290,14 @@ function apply_filter(products_to_filter) {
       return;
     }
   });
-  
+
+  // 直接輸入數量
   tbody.addEventListener('input', (e) => {
     if (!e.target.classList.contains('qty-input')) return;
     const tr = e.target.closest('tr');
     const key = tr.getAttribute('data-key');
     const st = rowState.get(key) || { checked: false, qty: 0 };
+    const chk = tr.querySelector('.row-check');
 
     if (!chk.checked) {
       // 未勾選時不允許輸入
@@ -314,13 +316,6 @@ function apply_filter(products_to_filter) {
     refreshSummary();
   });
 })();
-
-function updateRowTotal(tr) {
-  const price = Number(tr.querySelector('[data-price]')?.dataset?.price || 0);
-  const qty = Number(tr.querySelector('.qty-input')?.value || 0);
-  const totalCell = tr.querySelector('.row-total');
-  if (totalCell) totalCell.textContent = (price * qty).toLocaleString();
-}
 
 // === 合計 & 下單 ===
 function refreshSummary() {
