@@ -15,6 +15,25 @@ const products = [
 
 (function showUsername() {
 // === 顯示登入使用者於導行列，補齊程式碼 ===
+  const name = localStorage.getItem('username') || '';
+  const nameEl = document.getElementById('username-display');
+  const loginEl = document.getElementById('login-link');
+  const regEl = document.getElementById('register-link');
+  const logoutEl = document.getElementById('logout-link');
+
+  if (nameEl) nameEl.textContent = name || '訪客';
+  if (name && loginEl) loginEl.style.display = 'none';
+  if (name && regEl) regEl.style.display = 'none';
+  if (logoutEl) logoutEl.style.display = name ? '' : 'none';
+
+  if (logoutEl) {
+    logoutEl.addEventListener('click', (e) => {
+      e.preventDefault();
+      localStorage.removeItem('username');
+      // 依你的頁面命名調整
+      window.location.href = './page_login.html';
+    });
+  }
 })();
 
 
