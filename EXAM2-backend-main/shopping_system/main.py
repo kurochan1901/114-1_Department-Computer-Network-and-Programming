@@ -4,14 +4,26 @@ import sqlite3
 import logging
 import re 
 import os
-
+from pathlib import Path 
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'dev-secret-change-me'
+
+BASE_DIR = Path(__file__).resolve().parent
+DB_PATH = BASE_DIR / "shopping_data.db"
+
+# 初始logging設定
+logging.basicConfig(level=logging.INFO, format='[%(levelname)s] %(message)s')
+
+# 規則（Email 與密碼至少兩條）
+EMAIL_RE = re.compile(r"^[A-Za-z0-9._%+-]+@gmail\.com$")
+HAS_UPPER = re.compile(r"[A-Z]")
+HAS_LOWER = re.compile(r"[a-z]")
 
 # 路徑修改
 def get_db_connection():
-    conn = sqlite3.connect('')
-    if not os.path.exists(''):
+    conn = sqlite3.connect('shopping_data.db')
+    if not os.path.exists('shopping_data.db'):
         logging.error(f"Database file not found at {''}")
         return None
     conn.row_factory = sqlite3.Row
