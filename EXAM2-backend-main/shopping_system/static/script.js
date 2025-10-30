@@ -220,6 +220,18 @@ function apply_filter(products_to_filter) {
     // 列 checkbox
     if (e.target.classList.contains('row-check')) {
       st.checked = e.target.checked;
+
+    const input = tr.querySelector('.qty-input');
+    if (st.checked) {
+      // 勾選後數量從 0 → 1，- 鎖住，+ 開啟
+      st.qty = Math.max(1, Number(input?.value || 0));
+      if (input) input.value = st.qty;
+    } else {
+      //取消勾選，數量改為 0，± 鎖住
+      st.qty = 0;
+      if (input) input.value = 0;
+    }
+      
       rowState.set(key, st);
       refreshSummary();
       return;
