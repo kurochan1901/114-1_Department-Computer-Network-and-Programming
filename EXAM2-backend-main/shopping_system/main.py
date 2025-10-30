@@ -29,6 +29,20 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
+# 呼叫.html iferror
+@app.route('/page_login.html')
+def page_login_html_alias():
+    return redirect(url_for('page_login'))
+
+@app.route('/page_register.html')
+def page_register_html_alias():
+    return redirect(url_for('page_register'))
+
+@app.route('/index.html')
+def index_html_alias():
+    return redirect(url_for('index'))
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
