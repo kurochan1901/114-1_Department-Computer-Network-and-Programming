@@ -33,6 +33,7 @@ def page_register():
         if len(password) < 8:
        ...
        
+
     return render_template('page_register.html')
 
 

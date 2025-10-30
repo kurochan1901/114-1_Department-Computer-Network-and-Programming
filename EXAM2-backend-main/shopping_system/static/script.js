@@ -14,7 +14,7 @@ const products = [
 
 
 (function showUsername() {
-// === 顯示登入使用者於導行列，補齊程式碼 ===
+// === 顯示登入使用者於導行列，補齊程式碼 ===  
   const name = localStorage.getItem('username') || '';
   const nameEl = document.getElementById('username-display');
   const loginEl = document.getElementById('login-link');
@@ -30,12 +30,10 @@ const products = [
     logoutEl.addEventListener('click', (e) => {
       e.preventDefault();
       localStorage.removeItem('username');
-      // 依你的頁面命名調整
       window.location.href = './page_login.html';
     });
   }
 })();
-
 
 //以下請自行新增或修改程式碼
 
@@ -81,6 +79,39 @@ const rowState = new Map();
 // === 工具：規整圖片路徑 ../static/... -> ./static/... 且移除多餘斜線 ===
 function normalizeImg(url = '') {
   return url.replace(/\/{2,}/g, '/').replace('../static', './static');
+}
+
+//control checkbox and buttons state
+function updateRowControls(tr) {
+  const chk = tr.querySelector('.row-check');
+  const dec = tr.querySelector('.btn-dec');
+  const inc = tr.querySelector('.btn-inc');
+  const input = tr.querySelector('.qty-input');
+  const qty = Number(input?.value || 0);
+  const checked = !!chk?.checked;
+
+  if (!checked) {
+    //未勾選時，數量 0，+-皆反白不可按（input 也鎖）
+    if (input) input.value = 0;
+    if (dec) dec.disabled = true;
+    if (inc) inc.disabled = true;
+    if (input) input.disabled = true;
+  } else {
+    // 勾選後：qty 至少 1；「-」在 qty==1 時不可按；「+」可按；input 開啟
+    if (qty < 1 && input) input.value = 1;
+    const v = Number(input?.value || 1);
+    if (dec) dec.disabled = (v <= 1);
+    if (inc) inc.disabled = false;
+    if (input) input.disabled = false;
+  }
+}
+
+// 更新一列的小計
+function updateRowTotal(tr) {
+  const price = Number(tr.querySelector('[data-price]')?.dataset?.price || 0);
+  const qty = Number(tr.querySelector('.qty-input')?.value || 0);
+  const totalCell = tr.querySelector('.row-total');
+  if (totalCell) totalCell.textContent = (price * qty).toLocaleString();
 }
 
 // === 渲染產品表格（含 checkbox、± 數量、單列總金額） ===
