@@ -16,12 +16,7 @@ def get_db_connection():
         return None
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
-
-# 補齊空缺程式碼
-@app.route()
-def page_login():
-        return 
-    
+   
 @app.route('/page_register', methods=[])
 def page_register():
     if request.method == 'POST':
