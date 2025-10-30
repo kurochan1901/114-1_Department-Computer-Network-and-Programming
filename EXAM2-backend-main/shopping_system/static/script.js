@@ -249,9 +249,11 @@ function apply_filter(products_to_filter) {
     refreshSummary();
   });
 
+  // 點擊 ± 按鈕
   tbody.addEventListener('click', (e) => {
     const tr = e.target.closest('tr');
     if (!tr) return;
+
     const key = tr.getAttribute('data-key');
     const st = rowState.get(key) || { checked: false, qty: 0 };
     const input = tr.querySelector('.qty-input');
@@ -260,21 +262,6 @@ function apply_filter(products_to_filter) {
     // 列 checkbox
     if (e.target.classList.contains('row-check')) {
       st.checked = e.target.checked;
-
-    const input = tr.querySelector('.qty-input');
-    if (st.checked) {
-      // 勾選後數量從 0 → 1，- 鎖住，+ 開啟
-      st.qty = Math.max(1, Number(input?.value || 0));
-      if (input) input.value = st.qty;
-    } else {
-      //取消勾選，數量改為 0，± 鎖住
-      st.qty = 0;
-      if (input) input.value = 0;
-    }
-      
-      rowState.set(key, st);
-      refreshSummary();
-      return;
     }
 
     // 減少數量
@@ -283,11 +270,6 @@ function apply_filter(products_to_filter) {
       const v = Math.max(1, Number(input.value || 1) - 1); // 勾選下的最小為 1
       input.value = v;
       st.qty = v;
-      // 若未勾選且 qty>0，自動勾選
-      const chk = tr.querySelector('.row-check');
-      if (!chk.checked && v > 0) {
-        chk.checked = true; st.checked = true;
-      }
       rowState.set(key, st);
       updateRowControls(tr);
       updateRowTotal(tr);
@@ -301,10 +283,6 @@ function apply_filter(products_to_filter) {
       const v = Math.max(1, Number(input.value || 1) + 1);
       input.value = v;
       st.qty = v;
-      const chk = tr.querySelector('.row-check');
-      if (!chk.checked && v > 0) {
-        chk.checked = true; st.checked = true;
-      }
       rowState.set(key, st);
       updateRowControls(tr);
       updateRowTotal(tr);
@@ -312,7 +290,7 @@ function apply_filter(products_to_filter) {
       return;
     }
   });
-
+  
   tbody.addEventListener('input', (e) => {
     if (!e.target.classList.contains('qty-input')) return;
     const tr = e.target.closest('tr');
