@@ -155,12 +155,12 @@ function display_products(products_to_display) {
       </tr>
     `;
     tbody.insertAdjacentHTML('beforeend', product_info);
-  }
-
+    
     // comfrim last row's controls and total
     const tr = tbody.lastElementChild;
     updateRowControls(tr);
     updateRowTotal(tr);
+  }
 
   refreshSummary();
 }
@@ -222,6 +222,32 @@ function apply_filter(products_to_filter) {
 (function bindTableEvents() {
   const tbody = document.querySelector('#products table tbody');
   if (!tbody) return;
+
+  // 勾選／取消勾選
+  tbody.addEventListener('change', (e) => {
+    if (!e.target.classList.contains('row-check')) return;
+    const tr = e.target.closest('tr');
+    const key = tr.getAttribute('data-key');
+    const st = rowState.get(key) || { checked: false, qty: 0 };
+
+    st.checked = e.target.checked;
+
+    const input = tr.querySelector('.qty-input');
+    if (st.checked) {
+      //勾選後數量從 0 → 1，- 鎖住，+ 開啟
+      st.qty = Math.max(1, Number(input?.value || 0));
+      if (input) input.value = st.qty;
+    } else {
+      // 取消勾選，數量改為 0，± 鎖住
+      st.qty = 0;
+      if (input) input.value = 0;
+    }
+
+    rowState.set(key, st);
+    updateRowControls(tr);
+    updateRowTotal(tr);
+    refreshSummary();
+  });
 
   tbody.addEventListener('click', (e) => {
     const tr = e.target.closest('tr');
@@ -293,15 +319,19 @@ function apply_filter(products_to_filter) {
     const key = tr.getAttribute('data-key');
     const st = rowState.get(key) || { checked: false, qty: 0 };
 
-    const v = Math.max(0, Number(e.target.value || 0));
+    if (!chk.checked) {
+      // 未勾選時不允許輸入
+      e.target.value = 0;
+      return;
+    }
+
+    let v = Number(e.target.value || 1);
+    if (isNaN(v) || v < 1) v = 1; // 勾選狀態下最小為 1
     e.target.value = v;
     st.qty = v;
 
-    const chk = tr.querySelector('.row-check');
-    if (!chk.checked && v > 0) {
-      chk.checked = true; st.checked = true;
-    }
     rowState.set(key, st);
+    updateRowControls(tr);
     updateRowTotal(tr);
     refreshSummary();
   });
