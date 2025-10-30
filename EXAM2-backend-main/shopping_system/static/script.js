@@ -129,6 +129,13 @@ function display_products(products_to_display) {
     const price = Number(p.price) || 0;
     const total = price * (state.qty || 0);
 
+    // 根據 state 先決定 disabled 狀態 預設鎖住
+    const isChecked = !!state.checked;
+    const qtyVal = isChecked ? Math.max(1, state.qty || 1) : 0;
+    const decDisabled = !isChecked || qtyVal <= 1;
+    const incDisabled = !isChecked;
+    const inputDisabled = !isChecked;
+
     const product_info = `
       <tr data-key="${key}">
         <td><input type="checkbox" class="row-check" ${state.checked ? 'checked' : ''}></td>
@@ -149,6 +156,11 @@ function display_products(products_to_display) {
     `;
     tbody.insertAdjacentHTML('beforeend', product_info);
   }
+
+    // comfrim last row's controls and total
+    const tr = tbody.lastElementChild;
+    updateRowControls(tr);
+    updateRowTotal(tr);
 
   refreshSummary();
 }
