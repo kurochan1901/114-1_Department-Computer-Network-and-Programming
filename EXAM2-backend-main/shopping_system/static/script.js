@@ -228,6 +228,8 @@ function apply_filter(products_to_filter) {
     if (!tr) return;
     const key = tr.getAttribute('data-key');
     const st = rowState.get(key) || { checked: false, qty: 0 };
+    const input = tr.querySelector('.qty-input');
+    const chk = tr.querySelector('.row-check');
 
     // 列 checkbox
     if (e.target.classList.contains('row-check')) {
@@ -251,8 +253,8 @@ function apply_filter(products_to_filter) {
 
     // 減少數量
     if (e.target.classList.contains('btn-dec')) {
-      const input = tr.querySelector('.qty-input');
-      const v = Math.max(0, Number(input.value || 0) - 1);
+      if (!chk.checked) return; // 未勾選不可操作
+      const v = Math.max(1, Number(input.value || 1) - 1); // 勾選下的最小為 1
       input.value = v;
       st.qty = v;
       // 若未勾選且 qty>0，自動勾選
@@ -261,6 +263,7 @@ function apply_filter(products_to_filter) {
         chk.checked = true; st.checked = true;
       }
       rowState.set(key, st);
+      updateRowControls(tr);
       updateRowTotal(tr);
       refreshSummary();
       return;
@@ -268,8 +271,8 @@ function apply_filter(products_to_filter) {
 
     // 增加數量
     if (e.target.classList.contains('btn-inc')) {
-      const input = tr.querySelector('.qty-input');
-      const v = Math.max(0, Number(input.value || 0) + 1);
+      if (!chk.checked) return; // 未勾選不可操作
+      const v = Math.max(1, Number(input.value || 1) + 1);
       input.value = v;
       st.qty = v;
       const chk = tr.querySelector('.row-check');
@@ -277,6 +280,7 @@ function apply_filter(products_to_filter) {
         chk.checked = true; st.checked = true;
       }
       rowState.set(key, st);
+      updateRowControls(tr);
       updateRowTotal(tr);
       refreshSummary();
       return;

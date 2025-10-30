@@ -47,3 +47,16 @@ img{
 }
 
 /* TODO:[CSS-WritingPart B Start]--------------------- */
+
+/* 讓按鈕 disabled 看起來不可按（反白/灰階） */
+button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+  filter: grayscale(100%);
+}
+
+/* 未勾選時我們會把 input disabled，給它淡底色 */
+input[disabled] {
+  background: #f3f4f6;
+  color: #9ca3af;
+}
